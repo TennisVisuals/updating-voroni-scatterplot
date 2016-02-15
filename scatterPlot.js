@@ -600,6 +600,7 @@ function scatterPlot() {
     }
 
     function keyWalk(valuesObject, optionsObject) {
+        if (!valuesObject || ! optionsObject) return;
         var vKeys = Object.keys(valuesObject);
         var oKeys = Object.keys(optionsObject);
         for (var k=0; k < vKeys.length; k++) {
