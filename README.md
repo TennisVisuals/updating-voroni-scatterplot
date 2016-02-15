@@ -8,6 +8,7 @@
 
 ### Features:
 - Dynamic data transitions
+- Highlighting of data points
 - Zoom option for selections (Legend Clicks)
 - Events are configurable as options such that external functions can be seamlessly integrated
  - e.g. external tooltips can be configured for mouseover events
