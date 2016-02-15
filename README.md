@@ -18,10 +18,10 @@
 - chart.options(object) // many options don't have accessors
 - chart.width(width)
 - chart.height(height)
-- chart.margins(object)
 - chart.data(data) // set data
 - chart.update() // update chart
 - chart.colors(object) // chart.colors({'axis1': 'color1', 'axis2': 'color2'})
+- chart.highlight(identifier) // highlight datapoint (configurable in options)
 
 ##### operations on data held in chart instance
 - chart.pop()
