@@ -16,12 +16,12 @@
 ### Accessors:
 #### *by default accessors with no parameters return current values*
 - chart.duration(transition-time) // duration of transitions
-- chart.options(object) // many options don't have accessors
+- chart.options(object) // for options that don't have accessors
 - chart.width(width)
 - chart.height(height)
 - chart.data(data) // set data
 - chart.update() // update chart
-- chart.colors(object) // chart.colors({'axis1': 'color1', 'axis2': 'color2'})
+- chart.colors(object) // chart.colors({'group': 'color1', 'group': 'color2'})
 - chart.highlight(identifier) // highlight datapoint (configurable in options)
 
 ##### operations on data held in chart instance
