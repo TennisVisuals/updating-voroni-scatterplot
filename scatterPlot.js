@@ -1,6 +1,3 @@
-// TODO
-// Zoom to extents when filter by legend?
-
 function scatterPlot() {
       
     // options which should be accessible via ACCESSORS
@@ -600,12 +597,14 @@ function scatterPlot() {
     }
 
     function keyWalk(valuesObject, optionsObject) {
-        if (!valuesObject || ! optionsObject) return;
+        if (!valuesObject || !optionsObject) return;
         var vKeys = Object.keys(valuesObject);
         var oKeys = Object.keys(optionsObject);
         for (var k=0; k < vKeys.length; k++) {
            if (oKeys.indexOf(vKeys[k]) >= 0) {
-              if (typeof(optionsObject[vKeys[k]]) == 'object') {
+              var oo = optionsObject[vKeys[k]];
+              var vo = valuesObject[vKeys[k]];
+              if (typeof oo == 'object' && typeof vo !== 'function') {
                  keyWalk(valuesObject[vKeys[k]], optionsObject[vKeys[k]]);
               } else {
                  optionsObject[vKeys[k]] = valuesObject[vKeys[k]];
@@ -616,7 +615,7 @@ function scatterPlot() {
 
     chart.events = function(functions) {
          if (!arguments.length) return events;
-         keyWalk(funcitons, events);
+         keyWalk(functions, events);
          return chart;
     }
 
