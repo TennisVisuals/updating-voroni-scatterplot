@@ -247,6 +247,7 @@ function scatterPlot() {
                 update_circleGroups.enter()
                   .append("circle")
                   .attr("r", function() { if (animate) return 10; })
+                  .attr("sub_group", function(d) { return d[options.data.sub_group]; })
 
                 update_circleGroups.exit()
                   .attr("r", function() { if (animate) return 10; })
@@ -347,7 +348,7 @@ function scatterPlot() {
                     .attr('class', 'legendText')
                     .style('font-size', '11px')
                     .style('color', '#BABABA')
-                    .text(options.legend.text);
+                    .html(options.legend.text);
 
                   legendWrapper.selectAll('.legendSquare').remove();
 
