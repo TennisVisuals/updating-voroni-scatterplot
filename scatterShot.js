@@ -44,7 +44,7 @@ function init() {
          identifier:    'h2h',
          abbreviation:  'Set Score',
          group:         'Set Score',
-         sub_group:     'Tournament',
+         sub_group:     'gid',
          r_scale:       'PPG',
          x:             'Total Shots',
          y:             'Total Points'
@@ -65,7 +65,7 @@ function init() {
       legend: { 
          dom_element: legend,
          title:   'SET SCORE',
-         text:    'click to select all sets with same set score',
+         text:    'Click Legend to select Score groups.<br> Click Legend title to reset.',
          },
 
       display: {
@@ -77,16 +77,20 @@ function init() {
             fill:       undefined
          }
       }
-   })
+   });
+
+   sp.events({
+      'element': { 'click': highlightMatch }
+   });
 
    sp.colors({
-      "6-0":      "#EFB605", 
-      "6-1":      "#E58903", 
-      "6-2":      "#E01A25", 
-      "6-3":      "#C20049", 
-      "6-4":      "#991C71", 
+      "7-6":      "#2074A0",
       "7-5":      "#66489F",
-      "7-6":      "#2074A0"
+      "6-4":      "#991C71", 
+      "6-3":      "#C20049", 
+      "6-2":      "#E01A25", 
+      "6-1":      "#E58903", 
+      "6-0":      "#EFB605"
    });
 
    sp.duration(1000);
@@ -98,7 +102,7 @@ function displayPerSet() {
          identifier:    'h2h',
          abbreviation:  'Set Score',
          group:         'Set Score',
-         sub_group:     'Tournament',
+         sub_group:     'gid',
          r_scale:       'PPG',
          x:             'Total Shots',
          y:             'Total Points'
@@ -116,7 +120,7 @@ function displayPerGame() {
          identifier:    'h2h',
          abbreviation:  'Set Score',
          group:         'Set Score',
-         sub_group:     'Tournament',
+         sub_group:     'gid',
          r_scale:       'PPG',
          x:             'SPG',
          y:             'PPG'
@@ -135,7 +139,6 @@ init();
 
 d3.json('./atp_wta.dat', function(err, data) {
 
-   foo = data.data;
    // PPG: "5.67"
    // SPG: "26.17"
    // Set Score: "6-0"
@@ -143,9 +146,24 @@ d3.json('./atp_wta.dat', function(err, data) {
    // Total Shots: 157
    // Tournament: "Maui"
    // h2h: "Michael Mmoh v. Kyle Edmund"
+   // gid: 'MichaelMmohKyleEdmundMaui2016'
 
    sp.data(data.data);
    container.call(sp);
    sp.update();
 })
 
+function highlightMatch(d, i, element) {
+   var group = [];
+   d3.selectAll('circle').each(function() { 
+      var set = d3.select(this);
+      if (set.attr('sub_group') == d.gid) {
+         set.attr('r', 10);
+         set.style('opacity', 1);
+         group.push([set.attr('cx'), set.attr('cy')]);
+      } else {
+         set.attr('r', 2);
+         set.style('opacity', .2);
+      }
+   })
+}
